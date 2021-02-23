@@ -1,15 +1,13 @@
 import {defineComponent, ref, computed} from 'vue'
 import {Carousel} from 'ant-design-vue'
 import {bannersApi, BannerType, personalized, PersonalizedType} from "@/api/discovery/api";
-import {Wrap} from "./style";
+import {Wrap, Title} from "./style";
 import {Image} from 'ant-design-vue'
 import PlayCardList, {CardType} from "@/components/playcards";
 
 const App = defineComponent(() => {
     const bannerList = ref<BannerType[]>([]) //BANNER
-
     const cardList = ref<CardType[]>([])
-
     const bannerList_ = computed(() => {
             let newList = []
             let index = 0;
@@ -53,7 +51,11 @@ const App = defineComponent(() => {
             </div>)}
         </Carousel>
         {/*推荐*/}
-        <PlayCardList cards={cardList.value}/>
+        <div class={'recommend'}>
+            <Title>推荐歌单</Title>
+            <PlayCardList cards={cardList.value}/>
+        </div>
+
 
     </Wrap>)
 })

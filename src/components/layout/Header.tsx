@@ -6,6 +6,7 @@ import {useParent} from "@vant/use";
 import {provideThemeType, THEME_KEY} from "@/hook/useTheme";
 
 const Header = defineComponent(() => {
+
     const {parent} = useParent<provideThemeType>(THEME_KEY);  //获取theme
     const router = useRouter()
     const handleClick = () => {

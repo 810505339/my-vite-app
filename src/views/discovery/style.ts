@@ -1,13 +1,19 @@
 import styled from "vue3-styled-components";
+import {PropType} from 'vue'
+import {themeType} from "@/theme/theme";
 
 export const Wrap = styled('div')`
+
+  .recommend {
+    padding-top: 50px;
+  }
 
   .ant-carousel .slick-track {
     text-align: center;
 
     .img-gorp {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
     }
 
@@ -35,4 +41,13 @@ export const Wrap = styled('div')`
       border-radius: 5px;
     }
   }
+`
+
+export const Title = styled('div', {theme: Object as PropType<themeType>})`
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: ${({theme}) => theme?.titleFontColor!}
+
 `

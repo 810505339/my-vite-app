@@ -1,8 +1,10 @@
 import styled, {css} from "vue3-styled-components";
 import {ellipsis} from '@/theme/common'
+import {PropType} from "vue";
+import {themeType} from "@/theme/theme";
 
 
-export const CardWrap = styled('div')`
+export const CardWrap = styled('div', {theme: {type: Object as PropType<themeType>}})`
   cursor: pointer;
   flex-shrink: 0;
   width: 18%;
@@ -33,6 +35,8 @@ export const CardWrap = styled('div')`
 
   .name {
     ${() => ellipsis}
+    color: ${({theme}) => theme?.fontColor!};
+    padding: 5px 0 10px 0;
   }
 
   img {

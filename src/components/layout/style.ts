@@ -15,6 +15,8 @@ export const HeadWrap = styled('div', {theme: {type: Object as PropType<themeTyp
     font-size: 15px;
     border-radius: 50%;
     padding: 10px;
+    font-weight: 400;
+    color: ${({theme}) => theme?.headFontColor!};
 
     &:hover {
       background: ${({theme}) => theme?.roundHoverBgColor!};
@@ -24,7 +26,6 @@ export const HeadWrap = styled('div', {theme: {type: Object as PropType<themeTyp
 
 
 export const LayoutWrap = styled('div',)`
-  height: 100vh;
   display: flex;
   flex-direction: column;
 `
@@ -33,6 +34,7 @@ export const SliderWrap = styled('div', {theme: {type: Object as PropType<themeT
   background: ${({theme}) => theme?.menuBgColor!};
   color: ${({theme}) => theme?.fontColor!};
   width: 250px;
+  min-width: 100px;
 
   .menu-list {
     .router-link-active {
@@ -63,7 +65,8 @@ export const LayoutBody = styled('div')`
   flex: 1;
 
   .router-view {
-    padding: 15px;
+    padding: 15px 5vw;
+    min-width: 800px;
     flex: 1;
     overflow-x: hidden;
   }
