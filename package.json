@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@types/node": "^14.14.31",
+    "@vant/use": "^1.0.5",
     "@vitejs/plugin-vue-jsx": "^1.1.0",
     "ant-design-vue": "^2.0.0",
     "axios": "^0.21.1",

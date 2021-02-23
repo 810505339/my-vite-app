@@ -4,13 +4,12 @@ import {bannersApi, BannerType} from "@/api/discovery/api";
 import {Wrap} from "./style";
 
 const App = defineComponent(() => {
-    const bannerList  = ref<BannerType[]>([])
+    const bannerList = ref<BannerType[]>([])
 
-    const bannerList_=computed(()=> {
+    const bannerList_ = computed(() => {
             let newList = []
             let index = 0;
-            while (index<bannerList.value.length-1)
-            {
+            while (index < bannerList.value.length - 1) {
                 newList.push(bannerList.value.slice(index, index += 3));
             }
             return newList
@@ -23,16 +22,19 @@ const App = defineComponent(() => {
     })()
 
 
-
-
-
     return () => (<Wrap>
-        <Carousel>
-            {bannerList_.value.map((bannerGorp:BannerType[],index) => <div  key={index}>
+        <Carousel autoplay>
+            {bannerList_.value.map((bannerGorp: BannerType[], index) => <div key={index}>
                 <div class={'img-gorp'}>
-                    {bannerGorp.map((item,index)=>(<img src={item.pic}/>))}
+                    {bannerGorp.map((item, itemIndex) => (
+                        <>
+                            <div class={'img-item'}>
+                                <img src={item.pic} key={itemIndex}/>
+                                <span class={'tag'}>{item.typeTitle}</span>
+                            </div>
+                        </>
+                    ))}
                 </div>
-
             </div>)}
         </Carousel>
     </Wrap>)

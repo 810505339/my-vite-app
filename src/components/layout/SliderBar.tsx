@@ -3,6 +3,7 @@ import {SliderWrap} from './style'
 import {RouterLink, RouterLinkProps, useLink} from 'vue-router'
 import {menuRoutes} from '@/router'
 
+//自定义menuLink
 const MenuLink = defineComponent<AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterLinkProps>
 ({
     props: {
@@ -18,12 +19,6 @@ const MenuLink = defineComponent<AllowedComponentProps & ComponentCustomProps & 
                 'router-link-exact-active': isExactActive.value
             }}>{slots.default?.()}</li>)
         }
-        // const slots={
-        //     default:({navigate,isActive,}:any)=>(<li onClick={navigate}></li>)
-        // }
-        // return()=>(<>
-        //     {menuRoutes.map(item=><RouterLink to={item.path} custom  v-slots={slots}>{item.meta?.title}</RouterLink>)}
-        // </>)
     }
 })
 

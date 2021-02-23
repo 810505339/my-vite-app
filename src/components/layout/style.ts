@@ -7,7 +7,7 @@ import {themeType} from '@/theme/theme'
 export const HeadWrap = styled('div', {theme: {type: Object as PropType<themeType>}})`
   background: ${({theme}) => theme?.headerBgColor ?? ''};
   height: 50px;
-  flex-shrink: 0;
+  flex-shrink: 0; //防止被挤压
   display: flex;
   align-items: center;
 
@@ -61,8 +61,9 @@ export const StyledLink = styled(RouterLink)`
 export const LayoutBody = styled('div')`
   display: flex;
   flex: 1;
+
   .router-view {
-    padding: 2vw;
+    padding: 15px;
     flex: 1;
     overflow-x: hidden;
   }
