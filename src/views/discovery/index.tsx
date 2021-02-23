@@ -25,7 +25,7 @@ const App = defineComponent(() => {
         bannerList.value = banners
         cardList.value = result.map(item => {
             return {
-                picUrl: item.picUrl!,
+                picUrl: item.picUrl! + '?param=300y300',
                 desc: item.copywriter!,
                 name: item.name!
             }
