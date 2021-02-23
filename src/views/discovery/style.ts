@@ -24,7 +24,7 @@ export const Wrap = styled('div')`
         padding: 3px 10px;
         position: absolute;
         z-index: 2;
-        bottom: 0;
+        bottom: 6px;
         right: 0;
       }
     }

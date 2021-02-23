@@ -5,7 +5,7 @@ import {themeType} from '@/theme/theme'
 
 
 export const HeadWrap = styled('div', {theme: {type: Object as PropType<themeType>}})`
-  background: ${({theme}) => theme?.headerBgColor ?? ''};
+  background: ${({theme}) => theme?.headerBgColor!};
   height: 50px;
   flex-shrink: 0; //防止被挤压
   display: flex;
@@ -17,7 +17,7 @@ export const HeadWrap = styled('div', {theme: {type: Object as PropType<themeTyp
     padding: 10px;
 
     &:hover {
-      background: ${({theme}) => theme?.roundHoverBgColor || ''};
+      background: ${({theme}) => theme?.roundHoverBgColor!};
     }
   }
 `
@@ -30,13 +30,13 @@ export const LayoutWrap = styled('div',)`
 `
 
 export const SliderWrap = styled('div', {theme: {type: Object as PropType<themeType>}})`
-  background: ${({theme}) => theme?.menuBgColor ?? ''};
-  color: ${({theme}) => theme?.fontColor ?? ''};
+  background: ${({theme}) => theme?.menuBgColor!};
+  color: ${({theme}) => theme?.fontColor!};
   width: 250px;
 
   .menu-list {
     .router-link-active {
-      background: ${({theme}) => theme?.menuItemActiveBg ?? ''};
+      background: ${({theme}) => theme?.menuItemActiveBg!};
       color: #d33a31;
 
     }
@@ -45,7 +45,7 @@ export const SliderWrap = styled('div', {theme: {type: Object as PropType<themeT
       padding: 10px 20px;
 
       &:hover {
-        background: ${({theme}) => theme?.menuItemHoverBg ?? ''};
+        background: ${({theme}) => theme?.menuItemHoverBg!};
       }
     }
   }

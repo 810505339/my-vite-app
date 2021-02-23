@@ -1,10 +1,14 @@
 import {defineComponent, ref, computed} from 'vue'
 import {Carousel} from 'ant-design-vue'
-import {bannersApi, BannerType} from "@/api/discovery/api";
+import {bannersApi, BannerType, personalized, PersonalizedType} from "@/api/discovery/api";
 import {Wrap} from "./style";
+import {Image} from 'ant-design-vue'
+import PlayCardList, {CardType} from "@/components/playcards";
 
 const App = defineComponent(() => {
-    const bannerList = ref<BannerType[]>([])
+    const bannerList = ref<BannerType[]>([]) //BANNER
+
+    const cardList = ref<CardType[]>([])
 
     const bannerList_ = computed(() => {
             let newList = []
@@ -15,21 +19,32 @@ const App = defineComponent(() => {
             return newList
         })
 
-
     ;(async () => {
         const {banners} = await bannersApi<{ banners: BannerType[] }>(1)
+        const {result} = await personalized<{ result: PersonalizedType[] }>(10)
         bannerList.value = banners
+        cardList.value = result.map(item => {
+            return {
+                picUrl: item.picUrl!,
+                desc: item.copywriter!,
+                name: item.name!
+            }
+        })
+
+        console.log(bannerList.value)
+
     })()
 
 
     return () => (<Wrap>
+        {/*banner*/}
         <Carousel autoplay>
             {bannerList_.value.map((bannerGorp: BannerType[], index) => <div key={index}>
                 <div class={'img-gorp'}>
                     {bannerGorp.map((item, itemIndex) => (
                         <>
                             <div class={'img-item'}>
-                                <img src={item.pic} key={itemIndex}/>
+                                <Image src={item.pic} key={itemIndex} preview={false}/>
                                 <span class={'tag'}>{item.typeTitle}</span>
                             </div>
                         </>
@@ -37,6 +52,9 @@ const App = defineComponent(() => {
                 </div>
             </div>)}
         </Carousel>
+        {/*推荐*/}
+        <PlayCardList cards={cardList.value}/>
+
     </Wrap>)
 })
 

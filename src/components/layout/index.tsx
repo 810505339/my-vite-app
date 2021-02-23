@@ -1,4 +1,4 @@
-import {defineComponent, KeepAlive, Transition, VNode} from 'vue'
+import {defineComponent, KeepAlive, Transition, VNode, Suspense, defineAsyncComponent} from 'vue'
 import Header from "@/components/layout/Header";
 import {RouterView} from "vue-router";
 import {LayoutWrap, LayoutBody} from './style'
@@ -13,7 +13,9 @@ const Layout = defineComponent(() => {
                 <RouterView class={'router-view'} v-slots={{
                     default: ({Component}: { Component: VNode }) => (
                         <Transition mode={'out-in'} name={'component-fade'}>
-                            <KeepAlive>{Component}</KeepAlive>
+                            <KeepAlive>
+                                {Component}
+                            </KeepAlive>
                         </Transition>)
                 }}/>
             </LayoutBody>
