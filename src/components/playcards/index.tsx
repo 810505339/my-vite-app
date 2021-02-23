@@ -18,8 +18,8 @@ const PlayCardItem = defineComponent({
     setup(props) {
         return () => (<CardWrap>
             <div>
-                <Image src={props.picUrl}/>
-                <div>
+                <Image src={props.picUrl} preview={false}/>
+                <div class={'img-wrap'}>
                     <span class={'desc'}>{props.desc}</span>
                 </div>
             </div>
