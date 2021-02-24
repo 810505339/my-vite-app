@@ -72,6 +72,7 @@ const Song = defineComponent(() => {
 const Player = defineComponent({
     props: {},
     setup() {
+
         return () => (<div style={{height: '60px'}}>
             <PlayerWrap>
                 <Song/>
