@@ -16,7 +16,7 @@
       "vite/client",
       "node"
     ],
-    "suppressImplicitAnyIndexErrors":true,
+    "suppressImplicitAnyIndexErrors": true,
     "baseUrl": "./",
     "paths": {
       "@/*": [

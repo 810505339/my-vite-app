@@ -52,7 +52,9 @@ const App = defineComponent(() => {
         </Carousel>
         {/*推荐*/}
         <div class={'recommend'}>
-            <Title>推荐歌单</Title>
+            {
+                cardList.value && <Title>推荐歌单</Title>
+            }
             <PlayCardList cards={cardList.value}/>
         </div>
 

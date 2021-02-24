@@ -18,7 +18,6 @@ const App = defineComponent(() => {
             <ThemeProvider theme={themes.value}>
                 {/*{loading.value ? <Layout/> : <FullLoading/>}*/}
                 <Layout/>
-
                 {loading.value && <FullLoading/>}
 
             </ThemeProvider>

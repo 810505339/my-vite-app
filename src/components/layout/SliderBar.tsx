@@ -1,7 +1,8 @@
-import {defineComponent, createVNode, AllowedComponentProps, ComponentCustomProps, VNodeProps} from 'vue'
+import {defineComponent, AllowedComponentProps, ComponentCustomProps, VNodeProps} from 'vue'
 import {SliderWrap} from './style'
 import {RouterLink, RouterLinkProps, useLink} from 'vue-router'
 import {menuRoutes} from '@/router'
+import Icon from "@/components/icon";
 
 //自定义menuLink
 const MenuLink = defineComponent<AllowedComponentProps & ComponentCustomProps & VNodeProps & RouterLinkProps>
@@ -27,7 +28,10 @@ const SliderBar = defineComponent(() => {
     return () => (<SliderWrap>
         <ul class={'menu-list'}>
             {menuRoutes.map(item => <MenuLink to={item.path}
-                                              class={'menu-item'}><span>{item.meta?.title}</span></MenuLink>)}
+                                              class={'menu-item'}>
+                <Icon type={item.meta?.icon}/>
+                <span>{item.meta?.title}</span>
+            </MenuLink>)}
         </ul>
     </SliderWrap>)
 })
