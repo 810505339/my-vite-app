@@ -1,6 +1,7 @@
 import {defineComponent, PropType} from 'vue'
 import {CardWrap, CardsWrap} from './styled'
 import {Image} from "ant-design-vue";
+import Icon from '@/components/icon'
 
 export interface CardType {
     name: string,
@@ -17,10 +18,13 @@ const PlayCardItem = defineComponent({
     },
     setup(props) {
         return () => (<CardWrap>
-            <div>
+            <div class={'card-wrap'}>
                 <Image src={props.picUrl} preview={false}/>
                 <div class={'img-wrap'}>
                     <span class={'desc'}>{props.desc}</span>
+                </div>
+                <div class={'icon-wrap'}>
+                    <Icon type={'icon-play'} class={'icon'}/>
                 </div>
             </div>
             <p class={'name'}>{props.name}</p>

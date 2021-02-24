@@ -8,12 +8,37 @@ export const CardWrap = styled('div', {theme: {type: Object as PropType<themeTyp
   cursor: pointer;
   flex-shrink: 0;
   width: 18%;
-  position: relative;
+
   overflow: hidden;
+
+  .card-wrap {
+    position: relative;
+  }
+
+  .icon-wrap {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+    color: #d33a31;
+    opacity: 0;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    background: hsla(0, 0%, 100%, .5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
 
   &:hover {
     .img-wrap {
       transform: translateY(0);
+    }
+
+    .icon-wrap {
+      opacity: 1;
     }
   }
 
