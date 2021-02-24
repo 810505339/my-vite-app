@@ -17,9 +17,15 @@ export const Wrap = styled('div')`
       align-items: center;
     }
 
+    .ant-image {
+      padding-top: 39%;
+      width: 100%;
+    }
+
     .img-item {
       position: relative;
       width: 32%;
+
 
       .tag {
         border-top-left-radius: 5px;
@@ -36,6 +42,9 @@ export const Wrap = styled('div')`
     }
 
     img {
+      position: absolute;
+      left: 0;
+      top: 0;
       height: 100%;
       width: 100%;
       border-radius: 5px;

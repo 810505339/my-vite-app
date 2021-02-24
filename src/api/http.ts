@@ -1,7 +1,11 @@
 import axios from "axios";
 import {message} from 'ant-design-vue'
+import store from "@/stroe";
+
 
 let count = 0;
+
+
 const instance = axios.create({
     baseURL: '/api',
     timeout: 6000
@@ -11,7 +15,9 @@ instance.interceptors.response.use((response) => {
     count--;
     if (count === 0) {
         //关闭全屏loading
+        store.commit('setAxiosLoading', false)
     }
+
     return response.data
 }, () => {
 
@@ -20,9 +26,11 @@ instance.interceptors.response.use((response) => {
 
 instance.interceptors.request.use((config) => {
     if (count === 0) {
-        //打开请求
+        //打开
+        store.commit('setAxiosLoading', true)
     }
-    count++
+    count++;
+    console.log(count)
     return config
 }, () => {
     message.error('请求出错')
