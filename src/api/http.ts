@@ -30,7 +30,6 @@ instance.interceptors.request.use((config) => {
         store.commit('setAxiosLoading', true)
     }
     count++;
-    console.log(count)
     return config
 }, () => {
     message.error('请求出错')

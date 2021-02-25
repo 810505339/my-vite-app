@@ -13,7 +13,7 @@ const App = defineComponent(() => {
     const loading = computed(() => store.state.globalModule.axiosLoading)
 
     return () => {
-        console.log(loading.value)
+
         return (
             <ThemeProvider theme={themes.value}>
                 {/*{loading.value ? <Layout/> : <FullLoading/>}*/}

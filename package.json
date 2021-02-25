@@ -12,6 +12,7 @@
     "@vitejs/plugin-vue-jsx": "^1.1.0",
     "ant-design-vue": "^2.0.0",
     "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
     "normalize.css": "^8.0.1",
     "vue": "^3.0.5",
     "vue-router": "^4.0.4",

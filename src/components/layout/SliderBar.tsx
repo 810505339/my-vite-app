@@ -12,7 +12,6 @@ const MenuLink = defineComponent<AllowedComponentProps & ComponentCustomProps & 
         ...RouterLink.props,
     },
     setup(props, {slots}) {
-        console.log(props)
         const {isActive, isExactActive, navigate} = useLink(props)
         return () => {
             return (<li onClick={navigate} class={{
@@ -29,7 +28,7 @@ const SliderBar = defineComponent(() => {
         <ul class={'menu-list'}>
             {menuRoutes.map(item => <MenuLink to={item.path}
                                               class={'menu-item'}>
-                <Icon type={item.meta?.icon}/>
+                <Icon type={item.meta?.icon!}/>
                 <span>{item.meta?.title}</span>
             </MenuLink>)}
         </ul>
