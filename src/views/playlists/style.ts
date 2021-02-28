@@ -20,6 +20,45 @@ export const Wrap = styled('div')`
     }
 
   }
+
+  ul li {
+    margin: 0 10px !important;
+  }
+
+  .ant-pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .ant-pagination-item-active {
+    color: #d33a31;
+    border-color: #d33a31;
+
+    a {
+      color: #d33a31;
+    }
+
+    &:focus, &:active {
+      border-color: #d33a31;
+    }
+  }
+
+  .ant-pagination-item-active:focus, .ant-pagination-item-active:hover {
+    border-color: #d33a31;
+  }
+
+  .ant-pagination-prev:focus .ant-pagination-item-link, .ant-pagination-next:focus .ant-pagination-item-link, .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link {
+    color: #d33a31;
+  }
+
+
+  .ant-pagination-item:focus a, .ant-pagination-item:hover a {
+    color: #d33a31
+  }
+
+  .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-link-icon, .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-link-icon {
+    color: #d33a31;
+  }
 `
 
 export const TopWrap = styled('div', {bg: String})`

@@ -28,6 +28,7 @@ export interface PlayCardType {
 
 export interface PlaylistApiType {
     playlists: PlayCardType[]
+    total: number
 }
 
-export const playlistApi = (limit: number, cat: string, offset: number):Promise<PlaylistApiType> => axios.get(`/top/playlist?limit=${limit}&offset=${offset}&cat=${cat}`)
+export const playlistApi = (limit: number, cat: string, offset: number): Promise<PlaylistApiType> => axios.get(`/top/playlist?limit=${limit}&offset=${offset}&cat=${cat}`)
