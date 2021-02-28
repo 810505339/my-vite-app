@@ -4,6 +4,7 @@ import {tagList, highqualityApi, PlayLists, playlistApi, PlayCardType} from '@/a
 import {Image} from "ant-design-vue";
 import PlayCardList, {CardType} from '@/components/playcards'
 import {Pagination} from 'ant-design-vue'
+import {Unit} from "@/utils/format";
 
 
 const TopCards = defineComponent<{ PlayLists: PlayLists }>((props) => {
@@ -63,7 +64,7 @@ const PlayList = defineComponent(() => {
         const {playlists, total} = Api
         cardList.value = playlists.map(item => {
             return {
-                desc: `播放量:${item.playCount}`,
+                desc: `播放量:${Unit(Number(item.playCount))}`,
                 name: item.name,
                 picUrl: item.coverImgUrl
             }
