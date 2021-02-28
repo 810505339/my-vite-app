@@ -1,4 +1,4 @@
-import {defineComponent, ref, watchEffect} from 'vue'
+import {defineComponent, PropType, ref, watch, watchEffect} from 'vue'
 import {PlayerWrap, SongWrap} from './style'
 import {Image, Slider} from 'ant-design-vue'
 import Icon from '@/components/icon'
@@ -7,10 +7,11 @@ import {GithubOutlined, SelectOutlined} from '@ant-design/icons-vue'
 import {PlayerType} from './PlayerType'
 import {timeForMat} from "@/utils/format";
 
+
 //播放按钮
 const Control = defineComponent<{ isPlay: boolean }>((props, {emit}) => {
 
-
+    console.log(props.isPlay)
     const setPlay = () => {
         //修改播放
         emit('update:isPlay', !props.isPlay)
@@ -25,9 +26,9 @@ const Control = defineComponent<{ isPlay: boolean }>((props, {emit}) => {
             <Tooltip v-slots={{title: () => <>上一曲</>}}>
                 <Icon type={'icon-previous'} class={'icon'}/>
             </Tooltip>
-            <Tooltip v-slots={{title: () => <>{isPlay ? '播放' : '暂停'}</>}}>
-                   <span class={'play-wrap'}>
-                           <Icon type={isPlay ? 'icon-play' : 'icon-pause'} onClick={setPlay} class={'icon'}/>
+            <Tooltip v-slots={{title: () => <>{!isPlay ? '播放' : '暂停'}</>}}>
+                   <span class={'play-wrap'} onClick={setPlay}>
+                           <Icon type={!isPlay ? 'icon-play' : 'icon-pause'} class={'icon'}/>
                     </span>
             </Tooltip>
             <Tooltip v-slots={{title: () => <>下一曲</>}}>
@@ -44,12 +45,13 @@ Control.emits = ['update:isPlay']
 
 
 // 图标
-const Mode = defineComponent(() => {
+const Mode = defineComponent<{ volume: number }>((props, {emit}) => {
     const iconList = ref([
         {title: '顺序播放', type: 'icon-cycle'},
         {title: '单曲循环', type: 'icon-singleCycle'},
         {title: '随机播放', type: 'icon-random'},
     ])
+
 
     return () => (<div class={'mode'}>
         <Tooltip v-slots={{title: () => <>分享</>}}>
@@ -61,10 +63,17 @@ const Mode = defineComponent(() => {
         </Tooltip>
         <Icon type={'icon-list'} class={'icon'}/>
         <Icon type={'icon-laba'} class={'icon'}/>
-        <Slider tipFormatter={null} class={'volume'}/>
+        <Slider value={props.volume} onChange={(value: number) => emit('update:volume', value)}
+                tipFormatter={null} min={0}
+                max={100} class={'volume'}/>
         <GithubOutlined class={'icon'}/>
     </div>)
 })
+
+Mode.emits = ['update:volume']
+Mode.props = {
+    volume: Number as PropType<number>
+}
 
 //歌曲详情面板
 const Song = defineComponent<PlayerType>((props) => {
@@ -102,17 +111,40 @@ Song.props = {
 const Player = defineComponent<PlayerType>((props, {emit}) => {
     const audio = ref<HTMLAudioElement>()
     //歌曲是否在正播放
-    const isPlay = ref(true);
+    const isPlay = ref(false);
     //歌曲是否正在滑动
     const isSlide = ref(false);
+
+    const songSlider = ref<number>(0) //歌曲进度
+
+    const volume = ref(100) //音量
+
     //播放的方法
+
+
     watchEffect(() => {
-        isPlay.value ? audio.value?.pause() : audio.value?.play()
+        //自动收集依赖所以初始化会自动触发一次
+        isPlay.value ? audio.value?.play() : audio.value?.pause()
+
+    })
+    watch(volume, (volume, newVolume) => {
+        audio.value!.volume = newVolume / 100
     })
     //播放进行中
     const playUpdate = () => {
         const currentTime = (audio.value?.currentTime!) * 1000
+        songSlider.value = (currentTime / props.totalTime) * 1000
         emit('update:playTime', currentTime)
+    }
+
+    //歌曲改变
+    const songChange = (value: number) => {
+        audio.value!.currentTime = (value / 1000) * props.totalTime / 1000
+
+        console.log(1)
+        if (!isPlay.value) {
+            isPlay.value = true;
+        }
     }
 
 
@@ -121,9 +153,10 @@ const Player = defineComponent<PlayerType>((props, {emit}) => {
             <PlayerWrap>
                 <Song {...props}/>
                 <Control v-model={[isPlay.value, 'isPlay']}/>
-                <Mode/>
+                <Mode v-model={[volume.value, 'volume']}/>
                 <div class={'slider-bar'}>
-                    <Slider tipFormatter={null}/>
+                    <Slider v-model={[songSlider.value, 'value']} min={0} max={1000} tipFormatter={null}
+                            onChange={songChange}/>
                 </div>
                 <audio src={props.audio} ref={audio} onTimeupdate={playUpdate}/>
             </PlayerWrap>
