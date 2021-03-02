@@ -34,6 +34,9 @@ const Tabs = defineComponent((_, {emit}) => {
 
     const activeIndex = ref(0);
     const handleClick = (index: number) => {
+        if (activeIndex.value === index) {
+            return
+        }
         activeIndex.value = index;
         emit('activeTag', tagList[index])
     }
